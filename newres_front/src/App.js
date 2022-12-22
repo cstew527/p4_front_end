@@ -53,11 +53,19 @@ const App = () => {
         {resolution.map((resolution)=> {
           return (
           <div className='resolutions' key={'resolution.id'}>
-            <h4>Title: {resolution.title}</h4>
-            <h4>Image: {resolution.image}</h4>
-            <h4>Description: {resolution.description}</h4>
-            <h4>Category: {resolution.category}</h4>
-            <h4>Accomplished: {resolution.accomplished}</h4>
+            <div className='card' style={{width:"64rem"}}>
+              <img src={resolution.image} className="card-img-top"/>
+              <div className='card-body'>
+                <h5 className='card-title'>{resolution.title}</h5>
+                <h6 className='card-subtitle mb-2 text-muted'>{resolution.category}</h6>
+                <p className='card-text'>{resolution.description}</p>
+              </div>
+              <h4>Title: {resolution.title}</h4>
+              <h4>Image: {resolution.image}</h4>
+              <h4>Description: {resolution.description}</h4>
+              <h4>Category: {resolution.category}</h4>
+              <h4>Accomplished: {resolution.accomplished}</h4>
+            </div>
             <Edit handleUpdate= {handleUpdate} id = {resolution.id} resolution={resolution}/>
             <button onClick={handleDelete} value ={resolution.id}>x</button>
           </div>
