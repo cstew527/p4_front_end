@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import Add from './components/Add.js'
 import Edit from './components/Edit.js'
+import './App.css'
 
 const App = () => {
 
@@ -14,7 +15,7 @@ const App = () => {
   }
 
   const getResolution = () => {
-    axios.get('http://localhost:8000/api/resolutions')
+    axios.get('https://nye-resolutions.herokuapp.com/api/resolutions')
     .then((res) => {
       console.log(res.data)
       setResolution(res.data)
@@ -23,7 +24,7 @@ const App = () => {
 
   
   const handleCreate = (addResolution) => {
-    axios.post('http://localhost:8000/api/resolutions', addResolution)
+    axios.post('https://nye-resolutions.herokuapp.com/api/resolutions', addResolution)
     .then((res) => {
       console.log(res)
       getResolution()
@@ -32,7 +33,7 @@ const App = () => {
   
 
   const handleDelete = (event) => {
-    axios.delete('http://localhost:8000/api/resolutions/' + event.target.value)
+    axios.delete('https://nye-resolutions.herokuapp.com/api/resolutions/' + event.target.value)
     .then((res) => {
       console.log(res.data)
       getResolution()
@@ -42,7 +43,7 @@ const App = () => {
   const handleUpdate = (editResolution) => {
     console.log(editResolution)
     axios
-      .put('http://localhost:8000/api/resolutions/' + editResolution.id, editResolution)
+      .put('https://nye-resolutions.herokuapp.com/api/resolutions/' + editResolution.id, editResolution)
       .then((response) => {
         getResolution()
       })
@@ -75,23 +76,27 @@ const App = () => {
           }).map((resolution, index) => {
             return (
               <div className='col-md-6 col-xl-4 mb-4'>
-              <div className='card bg-light' key={index} style={{maxWidth:"500px"}}>
-                <div className='card-header'>
-                  <h5 className='card-title'>{resolution.title}</h5>
+                <div className='card bg-light' key={index} style={{maxWidth:"500px"}}>
+                  <div className='card-header'>
+                    <h5 className='card-title text-truncate text-nowrap'>{resolution.title}</h5>
+                  </div>
+                  
+                  <img src={resolution.image} className='card-img-top' alt=''/>
+                  <div className='card-body'>
+                    <p className='card-text text-truncate text-nowrap' id='title'>{resolution.description}</p>
+                    <p className='text-muted'>Category: <span className='badge badge-primary'>{resolution.category}</span></p>
+                  </div>
+                  <div className='card-footer'>
+                    <p className='card-text'>Completed: Not done</p>
+                  </div>
+                <div class="cbutton container">
+                  <Edit handleUpdate= {handleUpdate} id = {resolution.id} resolution={resolution}/>
+                  <button class="btn btn-outline-dark mt-2" onClick={handleDelete} value ={resolution.id}>Delete</button>
                 </div>
-                
-                <img src={resolution.image} className='card-img-top' alt=''/>
-                <div className='card-body'>
-                  <p className='card-text'>{resolution.description}</p>
-                  <p className='text-muted'>Category: <span className='badge badge-primary'>{resolution.category}</span></p>
                 </div>
-                <div className='card-footer'>
-                  <p className='card-text'>Completed: Not done</p>
+
+
                 </div>
-              </div>
-              <Edit handleUpdate= {handleUpdate} id = {resolution.id} resolution={resolution}/>
-              <button onClick={handleDelete} value ={resolution.id}>x</button>
-            </div>
             )
           })}
         </div>

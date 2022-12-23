@@ -46,7 +46,7 @@ const Edit = (props) => {
               <label htmlFor="accomplished">accomplished: </label>
               <input type="checkbox" name="accomplished" value={resolution.accomplished} onChange={handleChange}/>
                 <br/>
-            <input type="submit" />
+            <input class="btn btn-light" type="submit" />
                 
           </form>
         </details>
