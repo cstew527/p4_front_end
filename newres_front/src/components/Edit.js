@@ -15,59 +15,42 @@ const Edit = (props) => {
 
 
   return (
-    <>
-      <details>
-        <summary>Edit Resolution</summary>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="title">Title: </label>
-          <input
-            type="text"
-            name="title"
-            value={resolution.title}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <label htmlFor="image">Image: </label>
-          <input
-            type="text"
-            name="image"
-            value={resolution.image}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <label htmlFor="description">Description: </label>
-          <input
-            type="text"
-            name="description"
-            value={resolution.description}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <label htmlFor="category">Category: </label>
-          <input
-            type="text"
-            name="category"
-            value={resolution.category}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <label htmlFor="accomplished">accomplished: </label>
-          <input
-            type="checkbox"
-            name="accomplished"
-            value={resolution.accomplished}
-            onChange={handleChange}
-          />
-          <br/>
-          <br/>
-          <input type="submit" />
-        </form>
-      </details>
-    </>
+    <div class='container'>
+        <details class="btn btn-dark">
+          <summary>Edit Resolution</summary>
+          <form class="mb-1" onSubmit={handleSubmit}>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label" htmlFor="title">Title: </label>
+                <br />
+                <input type="text" name="title" value={resolution.title} onChange={handleChange}/>
+            </div>
+
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label" htmlFor="image">Image: </label>
+                <br />
+                <input type="text" name="image" value={resolution.image} onChange={handleChange}/>
+            </div>
+
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label" htmlFor="description">Description: </label>
+                <br/>
+                <input type="text" name="description" value={resolution.description} onChange={handleChange}/>
+            </div>
+
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label" htmlFor="category">category: </label>
+                <br/>
+                <input type="text" name="category" value={resolution.category} onChange={handleChange}/>
+            </div>
+
+              <label htmlFor="accomplished">accomplished: </label>
+              <input type="checkbox" name="accomplished" value={resolution.accomplished} onChange={handleChange}/>
+                <br/>
+            <input type="submit" />
+                
+          </form>
+        </details>
+  </div>
   )
 }
 

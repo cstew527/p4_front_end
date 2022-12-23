@@ -15,38 +15,41 @@ const Add = (props) => {
     props.handleCreate(resolution)
   }
   return (
-    <div class="add-f">
-      <form onSubmit = {handleSubmit}>
-        <div class="mb-3 lal">
-            <label htmlFor='title' for="formGroupExampleInput" class="form-label">Title</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="title" name="title" value= {resolution.title} onChange={handleChange}/>
-        </div>
-            
-        <div class="mb-3 lal">
-            <label htmlFor='image' for="formGroupExampleInput" class="form-label">image</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="image url" name="image" value= {resolution.image} onChange={handleChange}/>
-        </div>
+    <div class="add-f container">
+      <details class="btn btn-dark">
+      <summary>Add New Resolution</summary>
+          <form onSubmit = {handleSubmit}>
+            <div class="mb-3 lal">
+                <label htmlFor='title' for="formGroupExampleInput" class="form-label">Title</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="title" name="title" value= {resolution.title} onChange={handleChange}/>
+            </div>
+                
+            <div class="mb-3 lal">
+                <label htmlFor='image' for="formGroupExampleInput" class="form-label">image</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="image url" name="image" value= {resolution.image} onChange={handleChange}/>
+            </div>
 
-        <div class="mb-3 lal">
-            <label htmlFor='description' for="formGroupExampleInput" class="form-label">Description</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="description" name="description" value= {resolution.description} onChange={handleChange}/>
-        </div>
+            <div class="mb-3 lal">
+                <label htmlFor='description' for="formGroupExampleInput" class="form-label">Description</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="description" name="description" value= {resolution.description} onChange={handleChange}/>
+            </div>
 
-        <div class="mb-3 lal">
-            <label htmlFor='category' for="formGroupExampleInput" class="form-label">Category</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="category" name="category" value= {resolution.category} onChange={handleChange}/>
-        </div>
+            <div class="mb-3 lal">
+                <label htmlFor='category' for="formGroupExampleInput" class="form-label">Category</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="category" name="category" value= {resolution.category} onChange={handleChange}/>
+            </div>
 
-        <div class="form-check form-switch">
-            <input class="form-check-input" id="flexSwitchCheckDefault" type="checkbox" name="accomplished" value ={resolution.accomplished} onChange = {handleChange}/>
-            <label class="form-check-label" for="flexSwitchCheckDefault" htmlFor="accomplished">Accomplished: </label>
-        </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" id="flexSwitchCheckDefault" type="checkbox" name="accomplished" value ={resolution.accomplished} onChange = {handleChange}/>
+                <label class="form-check-label" for="flexSwitchCheckDefault" htmlFor="accomplished">Accomplished: </label>
+            </div>
+                <br/>
+
+            <input class="btn btn-dark btn-lg"type="submit"/>
             <br/>
-
-        <input class="btn btn-dark btn-lg"type="submit"/>
-        <br/>
-        <br/>
-      </form>
+            <br/>
+          </form>
+      </details>
     </div>
   )
 }

@@ -6,6 +6,13 @@ import Edit from './components/Edit.js'
 const App = () => {
 
   const [resolution, setResolution] = useState([])
+  const [searchInput, setSearchInput] = useState("")
+
+  const handleSearchChange = (e) => {
+    e.preventDefault()
+    setSearchInput(e.target.value)
+  }
+
   const getResolution = () => {
     axios.get('http://localhost:8000/api/resolutions')
     .then((res) => {
@@ -40,40 +47,58 @@ const App = () => {
         getResolution()
       })
   }
-  
 
   useEffect(()=> {
     getResolution()
   }, [])
+
+  
   return (
     <>
-      <h1>Resolution App</h1>
+      <nav class="navbar navbar-light bg-light justify-content-between">
+        <h1 class="navbar-brand">Resolution App</h1>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={handleSearchChange} value={searchInput}/>
+          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
       <Add handleCreate = {handleCreate}/>
-      <div className='resolution'>
-        {resolution.map((resolution)=> {
-          return (
-          <div className='resolutions' key={'resolution.id'}>
-            <div className='card' style={{width:"64rem"}}>
-              <img src={resolution.image} className="card-img-top"/>
-              <div className='card-body'>
-                <h5 className='card-title'>{resolution.title}</h5>
-                <h6 className='card-subtitle mb-2 text-muted'>{resolution.category}</h6>
-                <p className='card-text'>{resolution.description}</p>
+      <br/>
+      <div className='container mt-5'>
+        <div className='row'>
+          {resolution.filter((resolution) => {
+            if (searchInput === '') {
+              return resolution
+            } else if (resolution.title.toLowerCase().includes(searchInput.toLowerCase())) {
+              return resolution
+            }
+          }).map((resolution, index) => {
+            return (
+              <div className='col-md-6 col-xl-4 mb-4'>
+              <div className='card bg-light' key={index} style={{maxWidth:"500px"}}>
+                <div className='card-header'>
+                  <h5 className='card-title'>{resolution.title}</h5>
+                </div>
+                
+                <img src={resolution.image} className='card-img-top' alt=''/>
+                <div className='card-body'>
+                  <p className='card-text'>{resolution.description}</p>
+                  <p className='text-muted'>Category: <span className='badge badge-primary'>{resolution.category}</span></p>
+                </div>
+                <div className='card-footer'>
+                  <p className='card-text'>Completed: Not done</p>
+                </div>
               </div>
-              <h4>Title: {resolution.title}</h4>
-              <h4>Image: {resolution.image}</h4>
-              <h4>Description: {resolution.description}</h4>
-              <h4>Category: {resolution.category}</h4>
-              <h4>Accomplished: {resolution.accomplished}</h4>
+              <Edit handleUpdate= {handleUpdate} id = {resolution.id} resolution={resolution}/>
+              <button onClick={handleDelete} value ={resolution.id}>x</button>
             </div>
-            <Edit handleUpdate= {handleUpdate} id = {resolution.id} resolution={resolution}/>
-            <button onClick={handleDelete} value ={resolution.id}>x</button>
-          </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
     </>
   )
+  
 }
 
 export default App
