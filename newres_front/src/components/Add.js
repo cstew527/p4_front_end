@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 const Add = (props) => {
   let emptyResolution = { title: '', image: '', description: '', category: '', accomplished: false}
   const [resolution, setResolution] = useState(emptyResolution)
-
+  
   const handleChange = (event) => {
     setResolution({...resolution, [event.target.name]: event.target.value})
   }
@@ -39,9 +39,9 @@ const Add = (props) => {
                 <input type="text" class="form-control" id="formGroupExampleInput" placeholder="category" name="category" value= {resolution.category} onChange={handleChange}/>
             </div>
 
-            <div class="form-check form-switch">
-                <input class="form-check-input" id="flexSwitchCheckDefault" type="checkbox" name="accomplished" value ={resolution.accomplished} onChange = {handleChange}/>
-                <label class="form-check-label" for="flexSwitchCheckDefault" htmlFor="accomplished">Accomplished: </label>
+            <div>
+                <input type="checkbox" name="accomplished" checked={resolution.accomplished} onChange={() => setResolution({...resolution, accomplished: !resolution.accomplished})}/>
+                <label htmlFor="accomplished">Accomplished: </label>
             </div>
                 <br/>
 

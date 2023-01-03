@@ -80,14 +80,14 @@ const App = () => {
                   <div className='card-header'>
                     <h5 className='card-title text-truncate text-nowrap'>{resolution.title}</h5>
                   </div>
-                  
+            
                   <img src={resolution.image} className='card-img-top' alt=''/>
                   <div className='card-body'>
                     <p className='card-text text-truncate text-nowrap' id='title'>{resolution.description}</p>
                     <p className='text-muted'>Category: <span className='badge badge-primary'>{resolution.category}</span></p>
                   </div>
                   <div className='card-footer'>
-                    <p className='card-text'>Completed: Not done</p>
+                    <p className='card-text'>Completed: {resolution.accomplished ? "Done" : "Not done"}</p>
                   </div>
                 <div class="cbutton container">
                   <Edit handleUpdate= {handleUpdate} id = {resolution.id} resolution={resolution}/>
