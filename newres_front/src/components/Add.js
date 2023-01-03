@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 const Add = (props) => {
   let emptyResolution = { title: '', image: '', description: '', category: '', accomplished: false}
   const [resolution, setResolution] = useState(emptyResolution)
-
+  
   const handleChange = (event) => {
     setResolution({...resolution, [event.target.name]: event.target.value})
   }
@@ -15,32 +15,59 @@ const Add = (props) => {
     props.handleCreate(resolution)
   }
   return (
-    <>
-      <form onSubmit = {handleSubmit}>
-        <label htmlFor="title">Title: </label>
-        <input type="text" name="title" value= {resolution.title} onChange = {handleChange} />
-        <br />
-        <br />
-        <label htmlFor="image">Image: </label>
-        <input type="text" name="image" value= {resolution.image} onChange = {handleChange} />
-        <br />
-        <br />
-        <label htmlFor="description">Description: </label>
-        <input type="text" name="description" value= {resolution.description} onChange = {handleChange} />
-        <br />
-        <br />
-        <label htmlFor="category">Category: </label>
-        <input type="text" name="category" value= {resolution.category} onChange = {handleChange} />
-        <br />
-        <br />
-        <label htmlFor="accomplished">Accomplished: </label>
-        <input type="checkbox" name="accomplished" value ={resolution.accomplished} onChange = {handleChange}/>
-        <br/>
-        <br/>
-        <input type="submit"/>
-      </form>
-    </>
+    <div class="add-f container">
+      <details class="btn btn-dark">
+      <summary>Add New Resolution</summary>
+          <form onSubmit = {handleSubmit}>
+            <div class="mb-3 lal">
+                <label htmlFor='title' for="formGroupExampleInput" class="form-label">Title</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="title" name="title" value= {resolution.title} onChange={handleChange}/>
+            </div>
+                
+            <div class="mb-3 lal">
+                <label htmlFor='image' for="formGroupExampleInput" class="form-label">image</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="image url" name="image" value= {resolution.image} onChange={handleChange}/>
+            </div>
+
+            <div class="mb-3 lal">
+                <label htmlFor='description' for="formGroupExampleInput" class="form-label">Description</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="description" name="description" value= {resolution.description} onChange={handleChange}/>
+            </div>
+
+            <div class="mb-3 lal">
+                <label htmlFor='category' for="formGroupExampleInput" class="form-label">Category</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="category" name="category" value= {resolution.category} onChange={handleChange}/>
+            </div>
+
+            <div>
+                <label htmlFor="accomplished">Accomplished: </label>
+                <input type="checkbox" name="accomplished" class="ml-2" checked={resolution.accomplished} onChange={() => setResolution({...resolution, accomplished: !resolution.accomplished})}/>
+            </div>
+                <br/>
+
+            <input class="btn btn-dark btn-lg"type="submit"/>
+            <br/>
+            <br/>
+          </form>
+      </details>
+    </div>
   )
 }
 
 export default Add
+
+
+{/* <div class="form-floating mb-3">
+  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Email address</label>
+</div>
+<div class="form-floating">
+  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+  <label for="floatingPassword">Password</label>
+</div>
+
+
+<div class="form-floating mb-3">
+            <input type="title" class="form-control" id="floatingInput" placeholder="title"/>
+            <input for="floatingInput" type="text" name="title" value= {resolution.title} onChange = {handleChange} />
+      </div> */}

@@ -2,12 +2,20 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import Add from './components/Add.js'
 import Edit from './components/Edit.js'
+import './App.css'
 
 const App = () => {
 
   const [resolution, setResolution] = useState([])
+  const [searchInput, setSearchInput] = useState("")
+
+  const handleSearchChange = (e) => {
+    e.preventDefault()
+    setSearchInput(e.target.value)
+  }
+
   const getResolution = () => {
-    axios.get('http://localhost:8000/api/resolutions')
+    axios.get('https://nye-resolutions.herokuapp.com/api/resolutions')
     .then((res) => {
       console.log(res.data)
       setResolution(res.data)
@@ -16,7 +24,7 @@ const App = () => {
 
   
   const handleCreate = (addResolution) => {
-    axios.post('http://localhost:8000/api/resolutions', addResolution)
+    axios.post('https://nye-resolutions.herokuapp.com/api/resolutions', addResolution)
     .then((res) => {
       console.log(res)
       getResolution()
@@ -25,7 +33,7 @@ const App = () => {
   
 
   const handleDelete = (event) => {
-    axios.delete('http://localhost:8000/api/resolutions/' + event.target.value)
+    axios.delete('https://nye-resolutions.herokuapp.com/api/resolutions/' + event.target.value)
     .then((res) => {
       console.log(res.data)
       getResolution()
@@ -35,37 +43,78 @@ const App = () => {
   const handleUpdate = (editResolution) => {
     console.log(editResolution)
     axios
-      .put('http://localhost:8000/api/resolutions/' + editResolution.id, editResolution)
+      .put('https://nye-resolutions.herokuapp.com/api/resolutions/' + editResolution.id, editResolution)
       .then((response) => {
         getResolution()
       })
   }
-  
 
   useEffect(()=> {
     getResolution()
   }, [])
+
+  
   return (
     <>
-      <h1>Resolution App</h1>
+      <nav class="navbar navbar-light bg-light justify-content-between">
+        <h1 class="navbar-brand">Resolution App</h1>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={handleSearchChange} value={searchInput}/>
+          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
       <Add handleCreate = {handleCreate}/>
-      <div className='resolution'>
-        {resolution.map((resolution)=> {
-          return (
-          <div className='resolutions' key={'resolution.id'}>
-            <h4>Title: {resolution.title}</h4>
-            <h4>Image: {resolution.image}</h4>
-            <h4>Description: {resolution.description}</h4>
-            <h4>Category: {resolution.category}</h4>
-            <h4>Accomplished: {resolution.accomplished}</h4>
-            <Edit handleUpdate= {handleUpdate} id = {resolution.id} resolution={resolution}/>
-            <button onClick={handleDelete} value ={resolution.id}>x</button>
-          </div>
-          )
-        })}
+      <br/>
+      <div className='container mt-5'>
+        <div className='row'>
+          {resolution.filter((resolution) => {
+            if (searchInput === '') {
+              return resolution
+            } else if (resolution.title.toLowerCase().includes(searchInput.toLowerCase())) {
+              return resolution
+            }
+          }).map((resolution, index) => {
+            return (
+              <div className='col-md-6 col-xl-4 mb-4'>
+                <div className='card bg-light' key={index} style={{maxWidth:"500px"}}>
+                  <div className='card-header'>
+                    <h5 className='card-title'>{resolution.title}</h5>
+                  </div>
+            
+                  <img src={resolution.image} className='card-img-top' alt=''/>
+                  <div className='card-body'>
+                    {/* Modal */}
+                    <button class="btn btn-info btn-sm mb-2" type="button" data-bs-toggle="collapse" data-bs-target={`#${index}`} aria-expanded="false" aria-controls={index}>
+                    Read more
+                    </button>
+                    <div class="collapse" id={index}>
+                      <div class="card card-body">
+                        {resolution.description}
+                      </div>
+                    </div>
+                    {/* Modal */}
+
+                    
+                    <p className='text-muted'>Category: <span className='badge badge-primary'>{resolution.category}</span></p>
+                  </div>
+                  <div className='card-footer'>
+                    <p className='card-text'>Completed: {resolution.accomplished ? "Done" : "Not done"}</p>
+                  </div>
+                <div class="cbutton container">
+                  <Edit handleUpdate= {handleUpdate} id = {resolution.id} resolution={resolution}/>
+                  <button class="btn btn-outline-dark mt-2" onClick={handleDelete} value ={resolution.id}>Delete</button>
+                </div>
+                </div>
+
+
+                </div>
+            )
+          })}
+        </div>
       </div>
     </>
   )
+  
 }
 
 export default App
