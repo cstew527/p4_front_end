@@ -83,8 +83,18 @@ const App = () => {
             
                   <img src={resolution.image} className='card-img-top' alt=''/>
                   <div className='card-body'>
-                    <p className='card-text text-truncate' id='title'>{resolution.description}</p>
-                    <button type="button" class="btn btn-info btn-sm">Read more</button>
+                    {/* Modal */}
+                    <button class="btn btn-info btn-sm mb-2" type="button" data-bs-toggle="collapse" data-bs-target={`#${index}`} aria-expanded="false" aria-controls={index}>
+                    Read more
+                    </button>
+                    <div class="collapse" id={index}>
+                      <div class="card card-body">
+                        {resolution.description}
+                      </div>
+                    </div>
+                    {/* Modal */}
+
+                    
                     <p className='text-muted'>Category: <span className='badge badge-primary'>{resolution.category}</span></p>
                   </div>
                   <div className='card-footer'>
