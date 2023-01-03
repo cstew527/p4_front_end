@@ -35,7 +35,7 @@ const Edit = (props) => {
             </div>
             <div className='mb-3 form-check checkb'>
               <label htmlFor='accomplished' className='form-check-input'>Accomplished: </label><br/>
-              <input type='checkbox' name='accomplished' checked={resolution.accomplished} onChange={() => setResolution({...resolution, accomplished: !resolution.accomplished})}/><br/>
+              <input type='checkbox' class='ml-4'name='accomplished' checked={resolution.accomplished} onChange={() => setResolution({...resolution, accomplished: !resolution.accomplished})}/><br/>
             </div>
             <input className='btn btn-light' type='submit'/>
           </form>

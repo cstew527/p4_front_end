@@ -40,8 +40,8 @@ const Add = (props) => {
             </div>
 
             <div>
-                <input type="checkbox" name="accomplished" checked={resolution.accomplished} onChange={() => setResolution({...resolution, accomplished: !resolution.accomplished})}/>
                 <label htmlFor="accomplished">Accomplished: </label>
+                <input type="checkbox" name="accomplished" class="ml-2" checked={resolution.accomplished} onChange={() => setResolution({...resolution, accomplished: !resolution.accomplished})}/>
             </div>
                 <br/>
 

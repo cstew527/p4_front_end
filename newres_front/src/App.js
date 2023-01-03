@@ -78,12 +78,13 @@ const App = () => {
               <div className='col-md-6 col-xl-4 mb-4'>
                 <div className='card bg-light' key={index} style={{maxWidth:"500px"}}>
                   <div className='card-header'>
-                    <h5 className='card-title text-truncate text-nowrap'>{resolution.title}</h5>
+                    <h5 className='card-title'>{resolution.title}</h5>
                   </div>
             
                   <img src={resolution.image} className='card-img-top' alt=''/>
                   <div className='card-body'>
-                    <p className='card-text text-truncate text-nowrap' id='title'>{resolution.description}</p>
+                    <p className='card-text text-truncate' id='title'>{resolution.description}</p>
+                    <button type="button" class="btn btn-info btn-sm">Read more</button>
                     <p className='text-muted'>Category: <span className='badge badge-primary'>{resolution.category}</span></p>
                   </div>
                   <div className='card-footer'>
